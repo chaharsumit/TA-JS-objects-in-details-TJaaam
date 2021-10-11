@@ -76,14 +76,14 @@ function createQuestion(title, options, correctAnswerIndex){
   questionObj.title = title;
   questionObj.options = options;
   questionObj.correctAnswerIndex = correctAnswerIndex;
-  questionObj.isAnswerCorrect = (index) => {
+  questionObj.isAnswerCorrect = function(index){
     if(index === this.correctAnswerIndex){
       return true;
     }else{
       return false;
     }
   };
-  questionObj.getCorrectAnswer = () => {
+  questionObj.getCorrectAnswer = function(){
     return this.options[this.correctAnswerIndex];
   };
   return questionObj;
@@ -97,3 +97,43 @@ options are ${question1.options}`) - 1;
 question1.isAnswerCorrect(indexOfAnswer);
 question1.getCorrectAnswer();
 */
+
+/*
+function createQuestion(title, options, correctAnswerIndex){
+  let  questionObj = {};
+  questionObj.title = title;
+  questionObj.options = options;
+  questionObj.correctAnswerIndex = correctAnswerIndex;
+  questionObj.isAnswerCorrect = function(index){
+    if(index === this.correctAnswerIndex){
+      return true;
+    }else{
+      return false;
+    }
+  };
+  questionObj.getCorrectAnswer = function(){
+    return this.options[this.correctAnswerIndex];
+  };
+  return questionObj;
+}
+
+let question1 = createQuestion('What is the capital of Vietnam', ['hanoi', 'ho chi minh', 'hue', 'can tho'], 0);
+let question2 = createQuestion('What is the capital of Ukraine', ['Lviv', 'Kharkiv', 'Kiev', 'Donetsk'], 2);
+
+
+console.group(question1.title);
+console.log(question1.options);
+console.log(question1.correctAnswerIndex);
+console.log(question1.isAnswerCorrect(0));
+console.log(question1.getCorrectAnswer());
+console.groupEnd();
+
+
+console.group(question2.title);
+console.log(question2.options);
+console.log(question2.correctAnswerIndex);
+console.log(question2.isAnswerCorrect(2));
+console.log(question2.getCorrectAnswer());
+console.groupEnd();
+*/
+
