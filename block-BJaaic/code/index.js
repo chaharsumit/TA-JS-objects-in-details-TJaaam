@@ -11,6 +11,24 @@ let animalMethods = {
   }
 }
 
+function createAnimal(location, noOfLegs){
+  let animal = Object.create(animalMethods);
+  animal.location = location;
+  animal.numberOfLegs = noOfLegs;
+  return animal;
+}
+
+
+function createDog(location, noOfLegs,name, color){
+  let dog = createAnimal(location, noOfLegs);
+  Object.setPrototypeOf(dog, dogMethods);
+  dog.name = name;
+  dog.color = color;
+  return dog;
+}
+
+
+
 let dogMethods = {
   bark(){
     console.log(`I am ${this.name} and I can bark`);
@@ -30,14 +48,17 @@ let dogMethods = {
 
 Object.setPrototypeOf(dogMethods, animalMethods);
 
-function createDog(name, color){
-  let dog = Object.create(dogMethods);
-  dog.name = name;
-  dog.color = color;
-  return dog;
-}
+let tinku = createDog('fazilka', 4,'tinku', 'brown');
 
-let tinku = createDog('tinku', 'blue');
+
+
+function createCat(location, noOfLegs, name, colorOfEyes){
+  let cat = createAnimal(location, noOfLegs);
+  Object.setPrototypeOf(cat, catMethods);
+  cat.name = name;
+  cat.colorOfEyes = colorOfEyes;
+  return cat;
+}
 
 let catMethods = {
   meow(){
@@ -58,13 +79,6 @@ let catMethods = {
 
 Object.setPrototypeOf(catMethods, animalMethods);
 
-function createCat(name, colorOfEyes){
-  let cat = Object.create(catMethods);
-  cat.name = name;
-  cat.colorOfEyes = colorOfEyes;
-  return cat;
-}
-
-let billo = createCat('billo', 'brown');
+let billo = createCat('fazilka', 4, 'billo', 'brown');
 
 
