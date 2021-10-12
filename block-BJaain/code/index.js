@@ -78,7 +78,7 @@ let user = {
 
 user.foo(); // 'Simple function call' false
 let fun1 = user.foo1;
-fun1(); // false
+fun1(); // true
 user.foo1(); // false
 
 // ------------
