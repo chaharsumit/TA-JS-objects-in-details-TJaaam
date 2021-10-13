@@ -5,7 +5,10 @@
 /*** CHALLENGE 1 of 1 ***/
 
 function makePerson(name, age) {
-  // add code here
+  let obj = {};
+  obj.name = name;
+  obj.age = age;
+  return obj;
 }
 
 var vicky = makePerson('Vicky', 24);
@@ -21,16 +24,20 @@ var vicky = makePerson('Vicky', 24);
 /*** CHALLENGE 1 of 3 ***/
 
 var personStore = {
-  // add code here
+  greet: function(){
+    console.log('hello');
+  }
 };
 
-// /********* Uncomment this line to test your work! *********/
-// personStore.greet(); // -> Logs 'hello'
+personStore.greet(); // -> Logs 'hello'
 
 /*** CHALLENGE 2 of 3 ***/
 
 function personFromPersonStore(name, age) {
-  // add code here
+  let obj = Object.create(personStore);
+  obj.name = name;
+  obj.age = age;
+  return obj;
 }
 
 var sandra = personFromPersonStore('Sandra', 26);
@@ -42,7 +49,9 @@ var sandra = personFromPersonStore('Sandra', 26);
 
 /*** CHALLENGE 3 of 3 ***/
 
-// add code here
+personStore.introduce = function(){
+  console.log(`hi, my name is ${this.name}`);
+};
 
 // sandra.introduce(); // -> Logs 'Hi, my name is Sandra'
 
@@ -53,7 +62,9 @@ var sandra = personFromPersonStore('Sandra', 26);
 /*** CHALLENGE 1 of 3 ***/
 
 function PersonConstructor() {
-  // add code here
+  this.greet = function (){
+    console.log(`hello`);
+  }
 }
 
 // /********* Uncomment this line to test your work! *********/
@@ -62,11 +73,12 @@ var simon = new PersonConstructor();
 
 /*** CHALLENGE 2 of 3 ***/
 
-function personFromConstructor(name, age) {
-  // add code here
+function PersonFromConstructor(name, age) {
+  this.name = name;
+  this.age = age;
 }
 
-var mike = personFromConstructor('Mike', 30);
+var mike = new PersonFromConstructor('Mike', 30);
 
 // /********* Uncomment these lines to test your work! *********/
 // console.log(mike.name); // -> Logs 'Mike'
@@ -75,7 +87,12 @@ var mike = personFromConstructor('Mike', 30);
 
 /*** CHALLENGE 3 of 3 ***/
 // add code here
+PersonConstructor.prototype.introduce = 
+  function (){
+    console.log(`Hi, my name is ${this.name}`);
+  };
 
+Object.setPrototypeOf(PersonFromConstructor, PersonConstructor);
 // mike.introduce(); // -> Logs 'Hi, my name is Mike'
 
 /****************************************************************
@@ -85,25 +102,32 @@ var mike = personFromConstructor('Mike', 30);
 /*** CHALLENGE 1 of 3 ***/
 
 class PersonClass {
-  constructor() {
-    // add code here
+  constructor(name) {
+    this.name = name;
   }
-
-  // add code here
+  greet(){
+    console.log(`hello`);
+  }
 }
 
 // /********* Uncomment this line to test your work! *********/
 var george = new PersonClass();
-// george.greet(); // -> Logs 'hello'
+george.greet(); // -> Logs 'hello'
 
 /*** CHALLENGE 2 of 3 ***/
 
-// add code here
-
-// /********* Uncomment these lines to test your work! *********/
-// var thai = new DeveloperClass('Thai', 32);
-// console.log(thai.name); // -> Logs 'Thai'
-// thai.introduce(); //-> Logs 'Hello World, my name is Thai'
+class DeveloperClass extends PersonClass{
+  constructor(name){
+    super(name);
+  }
+  introduce(){
+    console.log(`Hello World, my name is ${this.name}`);
+  }
+}
+ /********* Uncomment these lines to test your work! *********/
+ var thai = new DeveloperClass('Thai', 32);
+ console.log(thai.name); // -> Logs 'Thai'
+ thai.introduce(); //-> Logs 'Hello World, my name is Thai'
 
 /****************************************************************
                       EXTENSION: SUBCLASSING
@@ -123,13 +147,22 @@ function userFactory(name, score) {
   return user;
 }
 
-var adminFunctionStore /* Put code here */;
+var adminFunctionStore = {};
+Object.setPrototypeOf(adminFunctionStore, userFunctionStore);
 
 function adminFactory(name, score) {
-  // Put code here
+  let obj = userFactory(name, score);
+  obj.type = 'Admin';
+  return obj;
 }
 
+Object.setPrototypeOf(adminFactory, adminFunctionStore);
+
 /* Put code here for a method called sharePublicMessage*/
+
+adminFactory.prototype.sharedPublicMessage = function(){
+  console.log(`Welcome users!`);
+}
 
 var adminFromFactory = adminFactory('Eva', 5);
 
