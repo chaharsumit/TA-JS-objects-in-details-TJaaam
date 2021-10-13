@@ -1,32 +1,33 @@
 class BookList{
   constructor(){
     this.allBooks = [];
+    this.currentIndex = 0;
   }
   add(book){
     this.allBooks.push(book);
   }
-  getCurrentBook(index){
-    return this.allBooks[index];
+  getCurrentBook(){
+    return this.allBooks[currentIndex];
   }
   getNextBook(index){
-    return this.allBooks[index + 1];
+    return this.allBooks[currentIndex + 1];
   }
   getPrevBook(index){
-    return this.allBooks[index - 1];
+    return this.allBooks[currentIndex - 1];
   }
   changeCurrentBook(updateIndex){
-    return this.allBooks[updateIndex];
+    return this.currentIndex = updateIndex;
   }
 }
 
-class Book extends BookList{
-  constructor(title, category, author, finishedDate){
+class Book{
+  constructor(title, category, author){
     super();
     this.title = title;
     this.category = category;
     this.author = author;
     this.isRead = false;
-    this.finishedDate = finishedDate;
+    this.finishedDate = null;
   }
   markBookAsRead(){
     this.isRead = true;
