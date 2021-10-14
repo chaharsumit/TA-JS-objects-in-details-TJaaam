@@ -36,7 +36,7 @@ class Cricketer extends Player{
 }
 
 class Teacher extends Person{
-  constructor(name,age,gender,sportsName){
+  constructor(name,age,gender,instituteName){
     super(name,age,gender);
     this.instituteName = instituteName;
   }
@@ -46,9 +46,9 @@ class Teacher extends Person{
 }
 
 class Artist extends Person{
-  constructor(name,age,gender,sportsName){
+  constructor(name,age,gender, kind){
     super(name,age,gender);
-    this.kin = kind;
+    this.kind = kind;
   }
   createArt(){
     console.log(`I create ${this.instituteName} kind of art`);
