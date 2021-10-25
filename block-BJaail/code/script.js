@@ -16,10 +16,21 @@ class BookList{
     return this.books.length;
   }
   createUI(){
-    this.books.forEach(book => {
-      let ui = book.createUI();
-      ui.querySelector("cross").addEventListener('click', this.delete.bind(this, book.id));
-      this.root.append(ui);
+    this.root.innerHTML = "";
+    this.books.forEach((book) => {
+        let tr = document.createElement('tr');
+        let bookAuthor = document.createElement('td');
+        bookAuthor.innerHTML = book.author;
+        let bookTitle = document.createElement('td');
+        bookTitle.innerHTML = book.title;
+        let bookUrl = document.createElement('td');
+        bookUrl.innerHTML = book.url;
+        let cross = document.createElement('td');
+        cross.setAttribute('id', 'delete');
+        cross.innerHTML = 'X';
+        cross.addEventListener('click', this.delete.bind(this, this.id));
+        tr.append(bookTitle, bookAuthor, bookUrl, cross);
+        this.root.append(tr);
       }
     );
   }
@@ -33,24 +44,26 @@ class Book{
     this.isRead = false;
     this.id = `id-${Date.now()}`;
   }
-  createUI(){
-    let tr = document.createElement('tr');
-    let bookAuthor = document.createElement('td');
-    let bookTitle = document.createElement('td');
-    let bookUrl = document.createElement('td');
-    let cross = document.createElement('td');
-    cross.classList.add('delete');
-    tr.append(bookTitle, bookAuthor, bookUrl, cross);
-  }
 }
 let button = document.querySelector('button');
-let title = document.querySelector('#title');
-let author = document.querySelector('#author');
-let url = document.querySelector('#url');
+let form = document.querySelector('form');
+let titleelm = document.querySelector('#title');
+let authorelm = document.querySelector('#author');
+let urlelm = document.querySelector('#isbn');
 let myBooks = new BookList(document.querySelector('tbody'));
-button.addEventListener('click', (event,title,author,url) => {
+
+function handleSubmit(event){
+  event.preventDefault();
+  const title = titleelm.value;
+  const author = authorelm.value;
+  const url = urlelm.value;
   myBooks.add(title, author, url);
-});
+  titleelm.value = '';
+  authorelm.value = '';
+  urlelm.value = '';
+}
+
+form.addEventListener('submit', handleSubmit);
 
 /*
   <tr class="book-info">
