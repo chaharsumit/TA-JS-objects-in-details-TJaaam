@@ -7,7 +7,7 @@ const quizQuestions = [
   {
     title: 'What is the capital of Uruguay?',
     options: ['Quito', 'Tolima', 'Lima', 'Montevideo'],
-    correctAnswerIndex: 2,
+    correctAnswerIndex: 3,
   },
   {
     title: 'What is the capital of Japan?',

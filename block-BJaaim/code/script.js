@@ -1,17 +1,10 @@
-let score = 0;
+let score = 1;
 let totalQuestions = quizQuestions.length;
 class Question{
   constructor(title, options = [], correctAnswerIndex){
     this.title = title;
     this.options = options;
     this.correctAnswerIndex = correctAnswerIndex;
-  }
-  isCorrect(answer){
-    if(this.options[this.correctAnswerIndex] === answer){
-      return true;
-    }else{
-      return false;
-    }
   }
   getCorrecctAnswer(){
     return this.options[this.correctAnswerIndex];
@@ -45,11 +38,44 @@ class Quiz{
     let question = new Question(title, options, correctAnswerIndex);
     this.allQuestions.push(question);
   }
+  nextQuestion(){
+    this.createUI();
+  }
+  ifCorrect(answer){
+    if(this.activeIndex === totalQuestions - 1){
+      return setTimeout(() => {
+        this.createScoreCard();
+      }, 1000);
+    }
+    let optionsForQuestion = this.allQuestions[this.activeIndex].options;
+    let rightAnswer = this.allQuestions[this.activeIndex].correctAnswerIndex;
+    if(optionsForQuestion[rightAnswer] === answer){
+      ++score;
+    }
+    this.activeIndex++;
+    return setTimeout(() => {
+      this.nextQuestion();
+    }, 1000); 
+  }
   createUI(){
     this.root.innerHTML = '';
-    this.allQuestions.forEach(question => {
-      this.root.append(question.createUI());
+    this.allQuestions.forEach((question,index) => {
+      if(index === this.activeIndex){
+        let ui = question.createUI();
+        ui.querySelectorAll('li').forEach(op => {
+          op.addEventListener('click', this.ifCorrect.bind(this, op.innerHTML));
+        });
+        this.root.append(ui);
+      }
     });
+  }
+  createScoreCard(){
+    this.root.innerHTML = '';
+    let h2 = document.createElement('h2');
+    h2.innerHTML = 'Your score is:';
+    let p = document.createElement('p');
+    p.innerHTML = `${score} / ${totalQuestions}`;
+    this.root.append(h2,p);
   }
   updateScore(answer){
     if(isCorrect(answer)){
@@ -63,6 +89,8 @@ let quiz = new Quiz(root);
 quizQuestions.forEach(question => {
   quiz.addQuestion(question.title, question.options, question.correctAnswerIndex);
 });
+
+quiz.createUI();
 
 /*<article class="question-container">
         <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, asperiores!</h2>

@@ -42,5 +42,11 @@ ul{
 
 li{
   flex: 0 1 100%;
-  margin-top: 3rem;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+li:hover{
+  cursor: pointer;
+  background-color: rgb(189, 228, 189);
 }
