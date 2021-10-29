@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main>
+    <div class="container">
+      <h1>
+        MyBookList
+      </h1>
+      <form>
+        <label for="title">title</label>
+        <input type="text" name="title" id="title" placeholder="Add Title for the book">
+        <label for="author">author</label>
+        <input type="text" name="author" id="author" placeholder="Add Title for the book">
+        <label for="isbn">ISBN#</label>
+        <input type="text" name="isbn" id="isbn" placeholder="Add image link for the book">
+        <button class="btn" type="submit">Add Book</button>
+      </form>
+      <table>
+        <thead>
+          <tr>
+            <th>title</th>
+            <th>author</th>
+            <th>isbn#</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          <!--<tr class="book-info">
+            <td class="book-data">silver lining playbook</td>
+            <td class="book-data">sam mendes</td>
+            <td class="book-data">ISBN</td>
+            <td class="book-data">X</td>
+          </tr>-->
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <script src="./script.js"></script>
+</body>
+</html>
